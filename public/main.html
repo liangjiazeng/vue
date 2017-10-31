@@ -79,7 +79,7 @@
       },
       methods:{
         handleTab:function(tab,event){
-          var path = '/clazz/'+this.activeName;
+          var path = 'http://47.94.253.115:3002/clazz/'+this.activeName;
           this.$router.push({ path: path });
         }
       }
@@ -144,9 +144,9 @@
         handleSubmit:function(){
           this.dialogFormVisible = false;
           var vm = this;
-          var url = '/clazz/update';
+          var url = 'http://47.94.253.115:3002/clazz/update';
           if(!vm.form.id){
-            url = '/clazz/save'
+            url = 'http://47.94.253.115:3002/clazz/save'
           }
           
           $.post(url,this.form,function(data){
@@ -155,7 +155,7 @@
                   type: 'success',
                   message: '操作成功!'
               });
-              var url ='/clazz/findAll';
+              var url ='http://47.94.253.115:3002/clazz/findAll';
               $.getJSON(url,function(data){
                 vm.clazzInfo = data;
               });
@@ -169,7 +169,7 @@
             type: 'warning'
           }).then(() => {
             var vm = this;
-            var url = '/clazz/batchDelete'
+            var url = 'http://47.94.253.115:3002/clazz/batchDelete'
             $.post(url,{
               ids:JSON.stringify([row.id])
             },function(data){
@@ -221,7 +221,7 @@
       },
       methods:{
         handleTab:function(tab,event){
-          var path = '/student/'+this.activeName;
+          var path = 'http://47.94.253.115:3002/student/'+this.activeName;
           this.$router.push({ path: path });
         }
       }
@@ -307,10 +307,10 @@
         handleSubmit:function(){
           this.dialogFormVisible = false;
           var vm = this;
-          var url = '/student/update';
+          var url = 'http://47.94.253.115:3002/student/update';
 
           if(!vm.form.id){
-            url = '/student/save'
+            url = 'http://47.94.253.115:3002/student/save'
           }
           
           $.post(url,this.form,function(data){
@@ -320,7 +320,7 @@
                   message: '操作成功!'
               });
 
-              var url ='/student/findAll';
+              var url ='http://47.94.253.115:3002/student/findAll';
               $.getJSON(url,function(data){
                 vm.studentInfo = data;
               });
@@ -335,7 +335,7 @@
             type: 'warning'
           }).then(() => {
             var vm = this;
-            var url = '/student/batchDelete'
+            var url = 'http://47.94.253.115:3002/student/batchDelete'
             $.post(url,{
               ids:JSON.stringify([row.id])
             },function(data){
@@ -347,7 +347,7 @@
               }
             });
             //刷新studentInfo
-            var url ='/student/findAll';
+            var url ='http://47.94.253.115:3002/student/findAll';
             var vm = this;
             $.getJSON(url,function(data){
               vm.studentInfo = data;
@@ -369,12 +369,12 @@
       },
       created:function(){
         //加载学生的数据
-        var url ='/student/findAll';
+        var url ='http://47.94.253.115:3002/student/findAll';
         var vm = this;
         $.getJSON(url,function(data){
           vm.studentInfo = data;
         });
-        $.getJSON('/clazz/findAll',function(data){
+        $.getJSON('http://47.94.253.115:3002/clazz/findAll',function(data){
           vm.classes = data;
         });
 
@@ -465,7 +465,7 @@
         },
         created:function(){
           var vm = this;
-          $.getJSON('/sc/findSelectedCourse',function(data){
+          $.getJSON('http://47.94.253.115:3002/sc/findSelectedCourse',function(data){
             vm.scList = data;
             data.forEach(function(item,index){
               var ss=parseFloat(((+item.sc.grade)/100)*item.c.credit);
@@ -477,14 +477,14 @@
           handleSubmit:function(){
             this.dialogFormVisible = false;
             var vm = this;
-            var url= '/sc/mark';
+            var url= 'http://47.94.253.115:3002/sc/mark';
             $.getJSON(url,{id:this.sc.id,grade:this.sc.grade},function(data){
               if(data.affectedRows>0){
                 vm.$message({
                     type: 'success',
                     message: '操作成功!'
                 });
-                $.getJSON('/sc/findSelectedCourse',function(data){
+                $.getJSON('http://47.94.253.115:3002/sc/findSelectedCourse',function(data){
                   vm.scList = data;
                   data.forEach(function(item,index){
                     var ss=(((+item.sc.grade)/100)*item.c.credit)+"";
@@ -508,7 +508,7 @@
               type: 'warning'
             }).then(() => {
               var vm = this;
-              var url = '/sc/cancelCourse'
+              var url = 'http://47.94.253.115:3002/sc/cancelCourse'
               $.get(url,{
                 studentId:row.s.id,
                 courseId:row.c.id
@@ -526,10 +526,10 @@
                  var chosed = +data[0].chosed;
                  var surplus = +data[0].surplus;
                  var course_name = row.c.name;
-                 $.get('/course/update_delete',{chosed:chosed,surplus:surplus,course_name:course_name},
+                 $.get('http://47.94.253.115:3002/course/update_delete',{chosed:chosed,surplus:surplus,course_name:course_name},
                   function(date){
                       //刷新studentInfo
-                        var url ='/sc/findSelectedCourse';
+                        var url ='http://47.94.253.115:3002/sc/findSelectedCourse';
                         $.getJSON(url,function(data){
                           vm.scList = data;
                           data.forEach(function(item,index){
@@ -548,7 +548,7 @@
           },
           handleIconClick:function(){
             var vm = this;
-            var url ='/sc/query';
+            var url ='http://47.94.253.115:3002/sc/query';
               $.getJSON(url,{keys:this.keywords},function(data){
                 console.log(data);
                 // data.forEach(function(item,index){
@@ -579,7 +579,7 @@
       },
       methods:{
         handleTab:function(){
-          var path = '/course/'+this.activeName;
+          var path = 'http://47.94.253.115:3002/course/'+this.activeName;
           this.$router.push({ path: path });
         }
       } 
@@ -635,7 +635,7 @@
       },
       created:function(){
         var vm = this;
-        $.getJSON('/course/findAll',function(data){
+        $.getJSON('http://47.94.253.115:3002/course/findAll',function(data){
           vm.courseInfo = data;
         });
       },
@@ -648,10 +648,10 @@
         handleSubmit:function(){
           this.dialogFormVisible = false;
           var vm = this;
-          var url = '/course/update';
+          var url = 'http://47.94.253.115:3002/course/update';
 
           if(!vm.form.id){
-            url = '/course/save'
+            url = 'http://47.94.253.115:3002/course/save'
           }
           
           $.post(url,this.form,function(data){
@@ -660,7 +660,7 @@
                   type: 'success',
                   message: '操作成功!'
               });
-              var url ='/course/findAll';
+              var url ='http://47.94.253.115:3002/course/findAll';
               $.getJSON(url,function(data){
                 vm.courseInfo = data;
               });
@@ -674,7 +674,7 @@
             type: 'warning'
           }).then(() => {
             var vm = this;
-            var url = '/course/batchDelete'
+            var url = 'http://47.94.253.115:3002/course/batchDelete'
             $.post(url,{
               ids:JSON.stringify([row.id])
             },function(data){
@@ -686,7 +686,7 @@
               }
             });
             //刷新studentInfo
-            var url ='/course/findAll';
+            var url ='http://47.94.253.115:3002/course/findAll';
             var vm = this;
             $.getJSON(url,function(data){
               vm.courseInfo = data;
@@ -723,7 +723,7 @@
       },
       methods:{
         handleTab:function(){
-          var path = '/sc/'+this.activeName;
+          var path = 'http://47.94.253.115:3002/sc/'+this.activeName;
           this.$router.push({ path: path });
         }
       }
@@ -798,7 +798,7 @@
       },
       created:function(){
         var vm = this;
-        $.getJSON('/sc/findSelectedCourse',function(data){
+        $.getJSON('http://47.94.253.115:3002/sc/findSelectedCourse',function(data){
           vm.scList = data;
         });
       },
@@ -806,14 +806,14 @@
         handleSubmit:function(){
           this.dialogFormVisible = false;
           var vm = this;
-          var url= '/sc/mark';
+          var url= 'http://47.94.253.115:3002/sc/mark';
           $.getJSON(url,{id:this.sc.id,grade:this.sc.grade},function(data){
             if(data.affectedRows>0){
               vm.$message({
                   type: 'success',
                   message: '操作成功!'
               });
-              $.getJSON('/sc/findSelectedCourse',function(data){
+              $.getJSON('http://47.94.253.115:3002/sc/findSelectedCourse',function(data){
                 vm.scList = data;
               });
             }
@@ -833,7 +833,7 @@
             type: 'warning'
           }).then(() => {
             var vm = this;
-            var url = '/sc/cancelCourse'
+            var url = 'http://47.94.253.115:3002/sc/cancelCourse'
             $.get(url,{
               studentId:row.s.id,
               courseId:row.c.id
@@ -847,14 +847,14 @@
             });
 
             //同时去更新选课
-            $.get('/course/findByName',{name:row.c.name},function(data){
+            $.get('http://47.94.253.115:3002/course/findByName',{name:row.c.name},function(data){
                var chosed = +data[0].chosed;
                var surplus = +data[0].surplus;
                var course_name = row.c.name;
-               $.get('/course/update_delete',{chosed:chosed,surplus:surplus,course_name:course_name},
+               $.get('http://47.94.253.115:3002/course/update_delete',{chosed:chosed,surplus:surplus,course_name:course_name},
                 function(date){
                     //刷新studentInfo
-                      var url ='/sc/findSelectedCourse';
+                      var url ='http://47.94.253.115:3002/sc/findSelectedCourse';
                       $.getJSON(url,function(data){
                         vm.scList = data;
                       });
@@ -869,7 +869,7 @@
         },
         handleIconClick:function(){
           var vm = this;
-          var url ='/sc/query';
+          var url ='http://47.94.253.115:3002/sc/query';
             $.getJSON(url,{keys:this.keywords},function(data){
               console.log(data);
               // data.forEach(function(item,index){
@@ -931,7 +931,7 @@
         },
         created:function(){
           var vm = this;
-          $.getJSON('/course/findAll',function(data){
+          $.getJSON('http://47.94.253.115:3002/course/findAll',function(data){
             vm.courseInfo = data;
           });
         },
@@ -949,7 +949,7 @@
          handleSubmit:function(){
           this.dialogFormVisible = false;
             console.log(this.form_input.name);
-            $.ajax('/sc/selectCourse',{
+            $.ajax('http://47.94.253.115:3002/sc/selectCourse',{
                 method:"post",
                 data:{
                   studentName:this.form_input.student_name,
@@ -959,7 +959,7 @@
                   course_name:this.form_input.course_name
                 },
                 success:function(data){
-                    $.getJSON('/course/findAll',function(data){
+                    $.getJSON('http://47.94.253.115:3002/course/findAll',function(data){
                       vm.courseInfo = data;
                     });
                 }
@@ -970,7 +970,7 @@
     //2. 创建vuerouter实例对象
     var router  = new VueRouter({
       routes:[{
-        path:'/student',
+        path:'http://47.94.253.115:3002/student',
         component:Student,
         children:[{
           path:'info',
@@ -983,7 +983,7 @@
           component:StudentGrade
         }]
       },{
-        path:'/course',
+        path:'http://47.94.253.115:3002/course',
         component:Course,
         children:[{
           path:'info',
@@ -993,7 +993,7 @@
           component:CourseInfo
         }]
       },{
-        path:'/clazz',
+        path:'http://47.94.253.115:3002/clazz',
         component:Clazz,
         children:[{
           path:'info',
@@ -1003,7 +1003,7 @@
           component:ClassInfo
         }]
       },{
-        path:'/sc',
+        path:'http://47.94.253.115:3002/sc',
         component:StudentCourse,
         children:[{
           path:'info',

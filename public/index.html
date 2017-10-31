@@ -129,7 +129,7 @@
 					alert();
 					var name = this.form.name;
 					var password = this.form.password;
-					var url = '/student/login';
+					var url = 'http://47.94.253.115:3002/student/login';
 					var vm = this;
 					$.post(url,{name:name,password:password},function(data){
 						console.log(data);
@@ -142,7 +142,7 @@
 		          })
 				},
 				toRegister:function(){
-					var url='/student/save';
+					var url='http://47.94.253.115:3002/student/save';
 					var vm = this;
 					$.post(url,this.form,function(data){
 						console.log(data);
@@ -164,7 +164,7 @@
 			created:function(){
 	        //加载学生的数据
 	        var vm = this;
-	        $.getJSON('/clazz/findAll',function(data){
+	        $.getJSON('http://47.94.253.115:3002/clazz/findAll',function(data){
 	          vm.classes = data;
 	        });
 
